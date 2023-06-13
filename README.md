@@ -1,2 +1,2 @@
 # memory-checker
-Helm Chart for checking high memory intense Pods and restart their Deployments
+A Helm chart to restart the top memory-consuming pods through Kubernetes Cronjobs
