@@ -1,0 +1,39 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: memory-checker
+spec:
+  schedule: "0 4 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: memory-checker
+          containers:
+          - name: memory-checker
+            image: bitnami/kubectl:latest
+            imagePullPolicy: Always
+            command: ["/bin/sh", "-c"]
+            args:
+              - |
+                # Get top 10 pods sorted by memory usage across all namespaces.
+                top_pods=$(kubectl top pod --sort-by=memory --all-namespaces | head -11 | tail -10)
+                
+                # Check if there are pods in the result.
+                if [ -n "$top_pods" ]; then
+                  echo "$top_pods" | while read -r line; do
+                    # Get namespace and pod name from the line.
+                    namespace=$(echo $line | awk '{print $1}')
+                    pod_name=$(echo $line | awk '{print $2}')
+                    
+                    # Extract the deployment name from the pod name, removing the last two hyphen-separated fields.
+                    deployment_name=$(echo $pod_name | awk -F'-' '{NF--; NF--; print $0}' OFS='-' | sed 's/-$//')
+                    echo "Listing deployment $deployment_name in namespace $namespace..."
+                    
+                    # Perform the rollout restart.
+                    # kubectl rollout restart deployment/$deployment_name -n $namespace
+                  done
+                else
+                  echo "No pods are currently running."
+                fi
+          restartPolicy: OnFailure
