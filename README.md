@@ -7,7 +7,7 @@ This repository contains a Helm chart for a Kubernetes CronJob that monitors and
 First, clone this repository:
 
 ```sh
-git clone https://github.com/foobar/memory-checker.git
+git clone https://github.com/NicolasKarnick/memory-checker.git
 cd memory-checker
 ```
 
