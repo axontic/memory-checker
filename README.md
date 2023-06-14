@@ -7,8 +7,8 @@ This repository contains a Helm chart for a Kubernetes CronJob that monitors and
 First, clone this repository:
 
 ```sh
-git clone https://github.com/NicolasKarnick/memory-checker.git
-cd memory-checker
+git clone https://github.com/axontic/memory-checker.git
+cd memory-checker/memory-checker
 ```
 
 Then, to install the Helm chart with the release name `my-release`:
