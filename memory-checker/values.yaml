@@ -6,6 +6,8 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
 
+schedule: "0 4 * * *"
+
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
@@ -27,7 +29,7 @@ args: |
       pod_name=$(echo $line | awk '{print $2}')
       deployment_name=$(echo $pod_name | awk -F'-' '{NF--; NF--; print $0}' OFS='-' | sed 's/-$//')
       echo "Restarting deployment $deployment_name in namespace $namespace..."
-      kubectl rollout restart deployment/$deployment_name -n $namespace
+      #kubectl rollout restart deployment/$deployment_name -n $namespace
     done
   else
     echo "No pods are currently running."

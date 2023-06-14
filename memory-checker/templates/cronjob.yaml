@@ -15,6 +15,5 @@ spec:
             imagePullPolicy: {{ .Values.image.pullPolicy }}
             command: ["/bin/sh", "-c"]
             args:
-              - |
-                {{ .Values.args}}
-          restartPolicy: {{ .Values.restartPolicy }}
+              -  {{ .Values.args | toYaml | indent 14 }}
+          restartPolicy: OnFailure
