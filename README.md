@@ -1,6 +1,6 @@
 ## Memory-Checker Helm Chart
 
-This repository contains a Helm chart for a Kubernetes CronJob that monitors and restarts the top 10 memory-consuming pods in your cluster. The CronJob uses `kubectl top pod` command to get the list of pods and then restarts their corresponding deployments.
+This repository contains a Helm chart for a Kubernetes CronJob that monitors and restarts the top 10 memory-consuming pods in your cluster. The CronJob uses `kubectl top pod` command to get the list of pods and then restarts their corresponding deployments. This is helpful if you cannot get use of the resource limits of your deployment due to stateful applications for example. The beauty of this approach is that you are in control of when to restart your containers. You're not at the mercy of resource limits which can terminate your pods unexpectedly during business hours causing a lot of stress and potentially impacting your operations.
 
 ### Installation
 
