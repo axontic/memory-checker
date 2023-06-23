@@ -17,3 +17,4 @@ spec:
             args:
               -  {{ .Values.args | toYaml | indent 14 }}
           restartPolicy: OnFailure
+  suspend: {{ .Values.suspend }}

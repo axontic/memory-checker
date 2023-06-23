@@ -35,6 +35,8 @@ args: |
     echo "No pods are currently running."
   fi
 
+suspend: false
+
 podAnnotations: {}
 
 podSecurityContext: {}
